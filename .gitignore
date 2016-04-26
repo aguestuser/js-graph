@@ -1,0 +1,30 @@
+# Logs
+logs
+*.log
+
+# Dependency directory
+node_modules
+
+# Compiled binary addons
+build/Release
+
+# Emacs-specific stuff
+.tern-port
+.tern-project
+.projectile
+flycheck
+
+# Coverage reports
+lib-cov
+coverage
+
+# Grunt intermediate storage
+.grunt
+
+# mac stuff
+.DS_Store
+
+# Runtime data
+pids
+*.pid
+*.seed
