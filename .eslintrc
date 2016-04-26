@@ -17,7 +17,8 @@
     "modules": true,
     "spread": true,
     "templateStrings": true,
-    "jsx": true
+    "jsx": true,
+    "experimentalObjectRestSpread": true
   },
   "rules": {
     "consistent-return": [0],

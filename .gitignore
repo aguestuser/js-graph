@@ -28,3 +28,6 @@ coverage
 pids
 *.pid
 *.seed
+
+# intellij stuff
+.idea/

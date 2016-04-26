@@ -47,7 +47,9 @@ For test input 1 through 5, if no such route exists, output 'NO SUCH ROUTE'.  Ot
 
 For the test input, the towns are named using the first few letters of the alphabet from A to D.  A route between two towns (A to B) with a distance of 5 is represented as AB5.
 
-__Graph:__ AB5, BC4, CD8, DC8, DE6, AD5, CE2, EB3, AE7
+```
+Graph: AB5, BC4, CD8, DC8, DE6, AD5, CE2, EB3, AE7
+```
 
 # Expected Output:
 
