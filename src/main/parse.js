@@ -14,11 +14,17 @@ export const read = path => fs.readFileSync(path).toString().split('\n')[0];
 export const tokenize = (str) => str.replace('Graph: ', '').split(', ');
 
 // [String] -> Graph (as defined in src/main/graph.js)
-export const format = specs => 
+export const format = specs =>
   specs.reduce((acc, spec) => ({
-    ...acc,
-    [spec[0]]: {
-      ...acc[spec[0]],
-      [spec[1]]: parseInt(spec[2])
+    ...acc, // deep clone existing graph
+    [spec[0]]: { // give the node an id corresponding to its label
+      node: spec[0],
+      edges: {
+        ...(acc[spec[0]] && acc[spec[0]].edges), // clone any existing edges for this node
+        [spec[1]]: { // give edges an id corresponding to the label of their head
+          nodeId: spec[1],
+          weight: parseInt(spec.slice(2))
+        }
+      }
     }
   }), {});

@@ -1,14 +1,10 @@
 /**
  * The shape of a Graph is defined as follows:
  *
- * Object[String, Object[String, Int]]
+ * (using flow notation)
  *
- * ie: an object (map) with:
- * - top-level keys representing node labels
- * - top-level values representing a collection of neighbors adjacent to the node labeled by the corresponding key
- * - once-nested keys representing neighboring node labels
- * - once-nested values representing edge weights
- *
- * TODO: use flow to formalize this type?
+ * type Graph = { [key: string]: Node }
+ * type Node = { node: string, edges: { [key:string]: Edge }
+ * type Edge = { [key: string]: nodeId: string, weight: number }
  *
  */
