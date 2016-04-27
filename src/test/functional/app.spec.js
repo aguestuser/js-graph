@@ -1,15 +1,16 @@
 import chai from 'chai';
-chai.should();
+
+import { graph as g } from '../support/sampleData';
 
 import { run }from '../../main/app';
+import * as graph from '../../main/graph/index';
 
-import { graph } from '../support/sampleData';
-import { numRoutes, distance, shortestPath } from '../../main/graph';
-import { lessThanNStops, exactlyNStops, distanceLessThanN } from '../../main/route';
+describe('Application', () => {
 
-xdescribe('Application', () => {
+  chai.should();
+  const { metrics: { hops, distance } } = graph;
 
-  it('meets the acceptance criteria of the challenge', () => {
+  xit('meets the acceptance criteria of the challenge', () => {
 
     run('src/resources/input.txt').should.eql(
       'Output #1: 9\n' +
@@ -29,54 +30,53 @@ xdescribe('Application', () => {
     describe('distance calculation', () => {
 
       it('calculates the distance of the route A-B-C', () => {
-        distance(graph, ['A', 'B', 'C']).should.eql(9);
+        graph.distance(g, ['A', 'B', 'C']).should.eql(9);
       });
 
       it('calculates the distance of the route A-D', () => {
-        distance(graph, ['A', 'D']).should.eql(5);
+        graph.distance(g, ['A', 'D']).should.eql(5);
       });
 
       it('calculates the distance of the route A-D-C', () => {
-        distance(graph, ['A', 'D', 'C']).should.eql(13);
+        graph.distance(g, ['A', 'D', 'C']).should.eql(13);
       });
 
       it('calculates the distance of the route A-E-B-C-D', () => {
-        distance(graph, ['A', 'D', 'C']).should.eql(22);
+        graph.distance(g, ['A', 'E', 'B', 'C', 'D']).should.eql(22);
       });
 
       it('calculates the distance of the route A-E-D', () => {
-        distance(graph, ['A', 'D', 'C']).should.eql('NO SUCH ROUTE');
+        graph.distance(g, ['A', 'E', 'D']).should.eql('NO SUCH ROUTE');
       });
 
     });
 
-    describe('route discovery predicated on stops', () => {
+    xdescribe('route discovery predicated on stops', () => {
 
       it('calculates the number of trips starting at C and ending at C with a maximum of 3 stops', () => {
-        numRoutes(graph, 'C', 'C', lessThanNStops(4)).should.eql(2);
+        graph.routesShorterThan(hops)(g, 4, 'C', 'C').should.eql(2);
       });
 
       it('calculates the number of trips starting at A and ending at C with exactly 4 stops', () => {
-        numRoutes(graph, 'A', 'C', exactlyNStops(4)).should.eql(3);
+        graph.routesEqualTo(hops)(g, 4, 'A', 'C').should.eql(3);
       });
     });
 
-
-    describe('shortest path calculation', () => {
+    xdescribe('shortest path calculation', () => {
 
       it('calculates the length of the shortest route from A to C', () => {
-        shortestPath(graph, 'A', 'C').should.eql(9);
+        graph.shortestPath(g, 'A', 'C').should.eql(9);
       });
 
       it('calculates the length of the shortest route from B to B', () => {
-        shortestPath(graph, 'B', 'B').should.eql(9);
+        graph.shortestPath(g, 'B', 'B').should.eql(9);
       });
     });
 
-    describe('route discovery predicated on distance', () => {
+    xdescribe('route discovery predicated on distance', () => {
 
       it('calculates the number of different routes from C to C with a distance of less than 30', () => {
-         numRoutes(graph, 'C', 'C', distanceLessThanN(30)).should.eql(7);
+         graph.routesShorterThan(distance)(g, 30, 'C', 'C').should.eql(7);
       });
     })
   });
