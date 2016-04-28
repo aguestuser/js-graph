@@ -3,7 +3,7 @@ import chai from 'chai';
 import { graph as g } from '../support/sampleData';
 
 import { run }from '../../main/app';
-import * as graph from '../../main/graph/index';
+import * as graph from '../../main/graph/graph';
 
 describe('Application', () => {
 

@@ -17,18 +17,27 @@
  *
  * */
 
-import { values } from '../../collection/object';
+import { node, edges } from '../graph';
 import { enqueue, dequeue, isEmpty } from '../../collection/queue';
+import { last } from '../../collection/object';
+
+// (BfAcc, BfRes -> Bool) -> BfAcc
+export const searchWhile = (acc, pred) => {
+  const acc_ = search(acc);
+  return pred(acc_.res) ? acc : // return if predicate satisfied
+    searchWhile({ // otherwise keep searching
+      ...acc_,
+      graph: visit(unvisit(acc_.graph), last(acc_.res.path)), // search a fresh, unmarked graph
+      visitors: [last(acc_.res.path)] // begin search at last node visited in prior search
+    }, pred);
+};
 
 // (BfAcc) -> BfAcc
 export const search = (acc) => {
-  debugger;
   if (isEmpty(acc.visitors)) return acc;
   else {
-    const [ tailId, visitors_ ] = dequeue(acc.visitors);
-    const tail = acc.graph[tailId];
-    const heads = values(tail.edges);
-    debugger;
+    const [ id, visitors_ ] = dequeue(acc.visitors);
+    const [ tail, heads ] = [ node(acc.graph, id), edges(acc.graph, id) ];
     return search(
       heads.reduce(
         (acc_, head) => record(acc_, tail, head),
@@ -38,24 +47,33 @@ export const search = (acc) => {
 };
 
 //(BfAcc, Node, Node) => BfAcc
-export const record = (acc, tail, head) => {
-  if (acc.graph[head.id].visited) return acc;
-  else {
-    const graph_ = visit(acc.graph, head.id);
-    return {
-      graph: graph_,
-      visitors: enqueue(acc.visitors, head.id),
-      res: acc.op(acc.res, tail, graph_[head.id]),
-      op: acc.op
-    }
-  }
-};
+export const record = (acc, tail, head) =>
+  acc.graph[head.id].visited ?
+    acc : {
+    ...acc,
+    graph: visit(acc.graph, head.id),
+    visitors: enqueue(acc.visitors, head.id),
+    res: performOps(acc, tail, acc.graph[head.id])
+  };
 
 // (Graph, String) => Graph
-export const visit = (graph, nodeId) => ({
+export const visit = (graph, id) => ({
   ...graph,
-  [nodeId]: {
-    ...graph[nodeId],
+  [id]: {
+    ...graph[id],
     visited: true
   }
 });
+
+export const unvisit = g =>
+  Object.keys(g).reduce((acc,id) => ({
+    ...acc,
+    [id]: {
+      ...acc[id],
+      visited: false
+    }
+  }), g);
+
+// (BfAcc) ->
+export const performOps = (acc, tail, head) =>
+  acc.ops.reduce((res, op) => op(res, tail, head), acc.res);

@@ -2,19 +2,14 @@
 import chai from 'chai';
 
 import { graph as g } from '../../../support/sampleData';
-import { traverse, mapHops, init } from '../../../../main/graph/bfs/bfGraphOps';
+import { traverse, mapHops, mapNHops, init } from '../../../../main/graph/bfs/bfGraphOps';
 import { identity } from '../../../../main/graph/bfs/bfNodeOps';
 import { visit } from '../../../../main/graph/bfs/bfSearch';
 
 describe('Breadth First Graph Operations module', () => {
   chai.should();
 
-  describe('#mapHops', () => {
 
-    it('generates a map of number of hops from a node to all other nodes in graph', () => {
-      mapHops(g, 'A').should.eql({ 0: ['A'], 1: ['B', 'D', 'E'], 2: ['C'] });
-    });
-  });
 
   describe("#traverse", () => {
 
@@ -27,13 +22,28 @@ describe('Breadth First Graph Operations module', () => {
     });
   });
 
+  describe('#mapHops', () => {
+
+    it('returns a map from # of hops to nodes reachable in that # hops from starting node', () => {
+      mapHops(g, 'A').should.eql({ 0: ['A'], 1: ['B', 'D', 'E'], 2: ['C'] });
+    });
+  });
+
+
+  describe('#mapNHops', () => {
+
+    it.only('maps hops to n levels from a starting node', () => {
+      mapNHops(g, 'A', 'C', 5).should.eql({});
+    });
+  });
+
   describe('helpers', () => {
 
     describe('#init', () => {
 
       it('initializes the accumulator for a BFS', () => {
-        init(g, 'A', ['A'], identity)
-          .should.eql({graph: visit(g, 'A'), visitors: ['A'], res: ['A'], op: identity });
+        init(g, 'A', ['A'], [identity])
+          .should.eql({graph: visit(g, 'A'), visitors: ['A'], res: ['A'], ops: [identity] });
       });
     });
   });

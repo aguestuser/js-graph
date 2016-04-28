@@ -21,6 +21,6 @@ export const addToHops = (res, tail, head) => ({
   ...res,
   hops: {
     ...res.hops,
-    [head.id]: res.hops[tail.id] + 1
+    [head.id]: (res.hops[head.id] || []).concat([parseInt(res.hops[tail.id].slice(-1)[0]) + 1])
   }
 });

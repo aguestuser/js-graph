@@ -7,12 +7,20 @@
  *
  */
 
+import { values } from '../collection/object';
+
 import { distance as _distance } from './distance';
 
 export const metrics = {
   hops: 'hops',
   distance: 'distance'
 };
+
+// (Graph, String) -> Node
+export const node = (g, id) => g[id];
+
+// (Graph, String) -> Array<Edge>
+export const edges = (g, id) => values(g[id].edges);
 
 // (Graph, [Node]) -> Either[String,Int]
 export const distance = (graph, route) => _distance(graph, route);

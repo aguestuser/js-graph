@@ -4,7 +4,7 @@ import sinon from 'sinon';
 import sinonChai from 'sinon-chai';
 
 import { graph as g } from '../../support/sampleData';
-import * as graph from '../../../main/graph/index';
+import * as graph from '../../../main/graph/graph';
 import * as distance from '../../../main/graph/distance';
 
 describe('Graph interface', () => {

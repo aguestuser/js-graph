@@ -2,8 +2,8 @@
 
 import chai from 'chai';
 import {graph as g} from '../../../support/sampleData';
-import { values } from '../../../../main/collection/object';
-import { search, visit, record } from '../../../../main/graph/bfs/bfSearch';
+import { values, count } from '../../../../main/collection/object';
+import { searchWhile, search, visit, record } from '../../../../main/graph/bfs/bfSearch';
 import { identity, addToPath } from '../../../../main/graph/bfs/bfNodeOps';
 
 describe('Breadth First Search module', () => {
@@ -32,10 +32,28 @@ describe('Breadth First Search module', () => {
       });
     });
 
+    describe('#searchWhile', () => {
+
+      it('traverses a graph recursively until a predicate is satisfied', () => {
+        const acc = { graph: g, visitors: ['A'], res: { path: ['A'] }, ops: [addToPath] };
+        const pred = res => count(res.path, 'C') > 3;
+        searchWhile(acc, pred).res.path.should.eql(
+          ['A', 'B', 'D', 'E', 'C', 'D', 'E', 'C', 'B', 'C', 'D', 'E', 'B', 'C', 'D', 'E', 'B']
+        );
+      });
+    });
+
     describe('#search', () => {
 
-      const searched =
-        search({graph: visit(g, 'A'), visitors: ['A'], res: { path: ['A'] }, op: addToPath});
+      let searched;
+      before(() =>
+        searched = search({
+          graph: visit(g, 'A'),
+          visitors: ['A'],
+          res: { path: ['A'] },
+          ops: [addToPath]
+        })
+      );
 
       it('traverses a graph *once* in breadth-first order (no cycles)', () => {
         searched.res.should.eql({ path: ['A', 'B', 'D', 'E', 'C'] });
@@ -66,7 +84,7 @@ describe('Breadth First Search module', () => {
 
       describe('when head has not been visited', () => {
 
-        const acc = { graph: g, visitors: [], res: { path: [] }, op: addToPath };
+        const acc = { graph: g, visitors: [], res: { path: [] }, ops: [addToPath] };
         const tail = g.E;
         const head = g.B;
 
