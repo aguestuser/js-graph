@@ -2,14 +2,12 @@
 import chai from 'chai';
 
 import { graph as g } from '../../../support/sampleData';
-import { traverse, mapHops, mapNHops, init } from '../../../../main/graph/bfs/bfGraphOps';
-import { identity } from '../../../../main/graph/bfs/bfNodeOps';
-import { visit } from '../../../../main/graph/bfs/bfSearch';
+import { traverse, mapHops, mapNHops, init } from '../../../../main/graph/bfSearch/bfGraphOps';
+import { identity } from '../../../../main/graph/bfSearch/bfNodeOps';
+import { visit } from '../../../../main/graph/bfSearch/bfSearch';
 
 describe('Breadth First Graph Operations module', () => {
   chai.should();
-
-
 
   describe("#traverse", () => {
 
@@ -32,8 +30,10 @@ describe('Breadth First Graph Operations module', () => {
 
   describe('#mapNHops', () => {
 
-    it.only('maps hops to n levels from a starting node', () => {
-      mapNHops(g, 'A', 'C', 5).should.eql({});
+    it('maps hops to n levels from a starting node', () => {
+      mapNHops(g, 'A', 'C', 5).should.eql(
+        { A: [0], B: [1, 4], C: [2, 5], D: [1, 3, 6], E: [1, 3, 6]}
+      );
     });
   });
 

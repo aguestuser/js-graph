@@ -3,8 +3,8 @@
 import chai from 'chai';
 import {graph as g} from '../../../support/sampleData';
 import { values, count } from '../../../../main/collection/object';
-import { searchWhile, search, visit, record } from '../../../../main/graph/bfs/bfSearch';
-import { identity, addToPath } from '../../../../main/graph/bfs/bfNodeOps';
+import { searchWhile, search, visit, record } from '../../../../main/graph/bfSearch/bfSearch';
+import { identity, addToPath } from '../../../../main/graph/bfSearch/bfNodeOps';
 
 describe('Breadth First Search module', () => {
 
@@ -38,7 +38,7 @@ describe('Breadth First Search module', () => {
         const acc = { graph: g, visitors: ['A'], res: { path: ['A'] }, ops: [addToPath] };
         const pred = res => count(res.path, 'C') > 3;
         searchWhile(acc, pred).res.path.should.eql(
-          ['A', 'B', 'D', 'E', 'C', 'D', 'E', 'C', 'B', 'C', 'D', 'E', 'B', 'C', 'D', 'E', 'B']
+          ['A', 'B', 'D', 'E', 'C', 'D', 'E', 'B', 'C', 'D', 'E', 'B', 'C', 'D']
         );
       });
     });

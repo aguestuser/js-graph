@@ -26,7 +26,7 @@ export const traverse = (g, id) =>
 
 // (Graph, string) => { [key: number]: Array<string> }
 export const mapHops = (g, id) => {
-  const res0 = { path: [id], hops: { [id]: 0}};
+  const res0 = { path: [id], hops: { [id]: [0]}};
   const acc0 = init(g, id, res0, [addToPath, addToHops]);
   return groupByValue(search(acc0).res.hops);
 };

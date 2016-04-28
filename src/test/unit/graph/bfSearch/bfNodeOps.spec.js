@@ -2,9 +2,9 @@
 import chai from 'chai';
 
 import { graph as g } from '../../../support/sampleData';
-import { identity, addToPath, addToHops } from '../../../../main/graph/bfs/bfNodeOps';
+import { identity, addToPath, addToHops } from '../../../../main/graph/bfSearch/bfNodeOps';
 
-describe('Breadth First Graph Operations module', () => {
+describe('Breadth First Node Operations module', () => {
   chai.should();
 
   describe('#identity', () => {
@@ -24,7 +24,7 @@ describe('Breadth First Graph Operations module', () => {
   describe('#addToHopMap', () => {
 
     it('adds the head node id to a map from node ids to hops required to reach them', () => {
-      addToHops({ hops: { A: 0 } }, g.A, g.B).should.eql({ hops: { A: 0, B: 1 } });
+      addToHops({ hops: { A: [0] } }, g.A, g.B).should.eql({ hops: { A: [0], B: [1] } });
     });
   });
 });
