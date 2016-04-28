@@ -1,36 +1,36 @@
 export const graph = {
   A: {
-    node: 'A',
+    id: 'A',
     edges: {
-      B: { nodeId: 'B', weight: 5 },
-      D: { nodeId: 'D', weight: 5 },
-      E: { nodeId: 'E', weight: 7 }
+      B: { id: 'B', weight: 5 },
+      D: { id: 'D', weight: 5 },
+      E: { id: 'E', weight: 7 }
     }
   },
   B: {
-    node: 'B',
+    id: 'B',
     edges: {
-      C: { nodeId: 'C', weight: 4 }
+      C: { id: 'C', weight: 4 }
     }
   },
   C: {
-    node: 'C',
+    id: 'C',
     edges: {
-      D: { nodeId: 'D', weight: 8 },
-      E: { nodeId: 'E', weight: 2 }
+      D: { id: 'D', weight: 8 },
+      E: { id: 'E', weight: 2 }
     }
   },
   D: {
-    node: 'D',
+    id: 'D',
     edges: {
-      C: { nodeId: 'C', weight: 8 },
-      E: { nodeId: 'E', weight: 6 }
+      C: { id: 'C', weight: 8 },
+      E: { id: 'E', weight: 6 }
     }
   },
   E: {
-    node: 'E',
+    id: 'E',
     edges: {
-      B: { nodeId: 'B', weight: 3 }
+      B: { id: 'B', weight: 3 }
     }
   }
 };

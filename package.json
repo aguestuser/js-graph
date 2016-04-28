@@ -21,7 +21,8 @@
     "sinon-chai": "^2.8.0"
   },
   "scripts": {
-    "test": "grunt test"
+    "test": "grunt test",
+    "debug-unit": "mocha debug src/test/unit/**/*.spec.js --compilers js:babel-register"
   },
   "author": "@agupestuser",
   "license": "MIT",

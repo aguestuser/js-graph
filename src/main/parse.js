@@ -18,11 +18,11 @@ export const format = specs =>
   specs.reduce((acc, spec) => ({
     ...acc, // deep clone existing graph
     [spec[0]]: { // give the node an id corresponding to its label
-      node: spec[0],
+      id: spec[0],
       edges: {
         ...(acc[spec[0]] && acc[spec[0]].edges), // clone any existing edges for this node
         [spec[1]]: { // give edges an id corresponding to the label of their head
-          nodeId: spec[1],
+          id: spec[1],
           weight: parseInt(spec.slice(2))
         }
       }

@@ -3,7 +3,7 @@
  *
  * type Graph = { [key: string]: Node }
  * type Node = { node: string, edges: { [key:string]: Edge }
- * type Edge = { [key: string]: nodeId: string, weight: number }
+ * type Edge = { [key: string]: id: string, weight: number }
  *
  */
 

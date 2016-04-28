@@ -54,7 +54,7 @@ describe('Application', () => {
     xdescribe('route discovery predicated on stops', () => {
 
       it('calculates the number of trips starting at C and ending at C with a maximum of 3 stops', () => {
-        graph.routesShorterThan(hops)(g, 4, 'C', 'C').should.eql(2);
+        graph.routesShorterThan(hops)(g, 3, 'C', 'C').should.eql(2);
       });
 
       it('calculates the number of trips starting at A and ending at C with exactly 4 stops', () => {
