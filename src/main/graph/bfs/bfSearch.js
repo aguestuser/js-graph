@@ -1,14 +1,24 @@
 'use strict';
 
 /**
- * BfAcc is defined as follows:
+ * BfAcc and BfRes are defined as follows (in flow notation):
  *
- * type BfAcc = { graph: Graph, visitors: Array<Node>, res: any, op: BfAcc -> any }
+ * type BfAcc = {
+ *   graph: Graph,
+ *   visitors: Array<Node>,
+ *   res: BfRes,
+ *   op: BfAcc -> BfRes
+ * }
+ *
+ * type BfRes = {
+ *   path: Array<string>,
+ *   hops: { [key: number]: Array<string>
+ * }
  *
  * */
 
-import { values } from '../collection/object';
-import { enqueue, dequeue, isEmpty } from '../collection/queue';
+import { values } from '../../collection/object';
+import { enqueue, dequeue, isEmpty } from '../../collection/queue';
 
 // (BfAcc) -> BfAcc
 export const search = (acc) => {
@@ -33,10 +43,10 @@ export const record = (acc, tail, head) => {
   else {
     const graph_ = visit(acc.graph, head.id);
     return {
-      ...acc,
       graph: graph_,
       visitors: enqueue(acc.visitors, head.id),
-      res: acc.op(acc, tail, graph_[head.id])
+      res: acc.op(acc.res, tail, graph_[head.id]),
+      op: acc.op
     }
   }
 };

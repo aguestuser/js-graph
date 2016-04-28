@@ -1,10 +1,10 @@
 'use strict';
 
 import chai from 'chai';
-import {graph as g} from '../../support/sampleData';
-import { values } from '../../../main/collection/object';
-import { search, visit, record } from '../../../main/graph/bfSearch';
-import { identity, addToPath } from '../../../main/graph/bfOps';
+import {graph as g} from '../../../support/sampleData';
+import { values } from '../../../../main/collection/object';
+import { search, visit, record } from '../../../../main/graph/bfs/bfSearch';
+import { identity, addToPath } from '../../../../main/graph/bfs/bfNodeOps';
 
 describe('Breadth First Search module', () => {
 
@@ -35,10 +35,10 @@ describe('Breadth First Search module', () => {
     describe('#search', () => {
 
       const searched =
-        search({graph: visit(g, 'A'), visitors: ['A'], res: ['A'], op: addToPath});
+        search({graph: visit(g, 'A'), visitors: ['A'], res: { path: ['A'] }, op: addToPath});
 
-      it('traverses a graph in breadth-first order - with no cycles', () => {
-        searched.res.should.eql(['A', 'B', 'D', 'E', 'C']);
+      it('traverses a graph *once* in breadth-first order (no cycles)', () => {
+        searched.res.should.eql({ path: ['A', 'B', 'D', 'E', 'C'] });
       });
 
       it('marks every reachable node as visited', () => {
@@ -57,7 +57,7 @@ describe('Breadth First Search module', () => {
         const gg = visit(g, 'B');
         const tail = gg.E;
         const head = gg.B;
-        const acc = { graph: gg, visitors: [], res: [], op: identity };
+        const acc = { graph: gg, visitors: [], res: {}, op: identity };
 
         it('returns the accumulator without changing it', () => {
           record(acc, tail, head).should.eql(acc);
@@ -66,7 +66,7 @@ describe('Breadth First Search module', () => {
 
       describe('when head has not been visited', () => {
 
-        const acc = { graph: g, visitors: [], res: [], op: addToPath };
+        const acc = { graph: g, visitors: [], res: { path: [] }, op: addToPath };
         const tail = g.E;
         const head = g.B;
 
@@ -75,11 +75,11 @@ describe('Breadth First Search module', () => {
         });
 
         it('adds the head to the visitors quque', () => {
-          const res =record(acc, tail, head).visitors.should.eql([head.id])
+          record(acc, tail, head).visitors.should.eql([head.id])
         });
 
         it('transforms the accumulated result', () => {
-          record(acc, tail, head).res.should.eql([head.id])
+          record(acc, tail, head).res.path.should.eql([head.id])
         });
       });
     });
