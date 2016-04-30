@@ -32,3 +32,13 @@ export const includes = (xs, a) => xs.indexOf(a) > -1;
 
 // [A] -> A
 export const last = xs => xs.slice(-1)[0];
+
+// [A] -> Int
+export const sum = xs => xs.reduce((acc, x) => acc + x, 0);
+
+// move to collection/fn?
+
+// (A, [A -> Boolean] -> Boolean
+export const satisfies = (route, preds) =>
+  preds.reduce((acc, pred) => acc && pred(route), true);
+

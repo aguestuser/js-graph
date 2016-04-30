@@ -1,28 +1,50 @@
 /**
  *
- * TrRes is defined as follows:
- *
  * type TrRes = { routes: Array<Route> }
- * type Route = { start: string, end: string, hops: number, dist: number }
+ * type Path = Array<string>
  *
  * */
 
-// (TrRes, Route) -> TrRes
-export const addToRoutes = (res, route) => ({
-  ...res,
-  routes: (res.routes || []).concat(route)
+import { satisfies, sum, last, includes } from '../../collection/object';
+import { distance } from '../../graph/distance';
+
+
+// TRANSFORMERS
+
+// TrAcc -> TrAcc
+export const identity = acc => acc;
+
+// TrAcc -> TrAcc
+export const countNode = acc => ({
+  ...acc,
+  res: {
+    ...acc.res,
+    count: acc.count + 1
+  }
 });
 
-// (TrRes, Route, [Route -> Boolean]) -> TrRes
-export const addToRoutesIf = (res, route, preds) =>
-  satisfies(route, preds) ? addToRoutes(res, route) : res;
+// TrAcc -> TrAcc
+export const addRouteIf = preds => acc =>
+  satisfies(acc.path, preds) ? addRoute(acc) : acc;
 
-// (Route, [Route -> Boolean]) -> Boolean
-export const satisfies = (route, preds) =>
-  preds.reduce((acc, pred) => acc && pred(route), true);
+
+// [Path -> Boolean] -> TrAcc  -> TrAcc
+export const addRoute = (acc) => ({
+  ...acc,
+  res: {
+    ...acc.res,
+    routes: [acc.path]
+  }
+});
+
+
+// PREDICATES
 
 // Int -> Route -> Boolean
-export const hopsLessThan = n => route => route.hops < n;
+export const hopsLessThan = n => route => route.length < n;
 
-// Int -> Route -> Boolean
-export const distLessThan = n => route => route.dist < n;
+// Graph -> Int -> Route -> Boolean
+export const distLessThan = graph => n => route => distance(graph, route) < n;
+
+// String -> Route -> Boolean
+export const endIs = end => route => last(route) === end;

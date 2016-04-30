@@ -1,7 +1,18 @@
 'use strict';
 import chai from 'chai';
 
-import { values, hasKey, hasValue, groupByValue, groupBy, count, includes, last } from '../../../main/collection/object';
+import {
+  values,
+  hasKey,
+  hasValue,
+  groupByValue,
+  groupBy,
+  count,
+  includes,
+  last,
+  sum,
+  satisfies
+} from '../../../main/collection/object';
 
 describe('Object module', () => {
   chai.should();
@@ -96,6 +107,31 @@ describe('Object module', () => {
     it('returns undefinded for an empty array', () => {
       (last([]) === undefined).should.be.true;
     })
+  });
+
+  describe('#sum', () => {
+
+    it('sums the elements of an array', () => {
+      sum([1,2,3]).should.eql(6);
+    });
+  });
+
+  describe('#satisfies', () => {
+
+    const foo = { bar: 2, baz: 2 };
+    const lessThan = (n, key) => foo => foo[key] < n;
+
+    it('returns true if an object satisfies a list of predicates', () => {
+      satisfies(foo, [lessThan(3, 'bar'), lessThan(3, 'baz')]).should.be.true;
+    });
+
+    it("returns false if an satisfies no predicates in a list", () => {
+      satisfies(foo, [lessThan(1, 'bar'), lessThan(1, 'baz')]).should.be.false;
+    });
+
+    it("returns false if an object satisfies some but not all predicates in a list", () => {
+      satisfies(foo, [lessThan(3, 'bar'), lessThan(1, 'baz')]).should.be.false;
+    });
   });
 });
 
