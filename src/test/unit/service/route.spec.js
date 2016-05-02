@@ -111,6 +111,7 @@ describe('Route service', () => {
         });
 
         describe('when both `hops` and distance are specified', () => {
+
           it('will terminate fold when hops *and* distance thresholds exceeded', () => {
             const specs ={
               hops: { mustBe: EQUAL_TO, num: 1 },

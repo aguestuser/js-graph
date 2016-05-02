@@ -2,12 +2,10 @@
 *
 * type Heap<A> = {
 *   queue: Array<A>,
-*   positions: { [id: String]: number }
+*   positions: { [id: string|number]: number }
 * }
 *
 * **/
-
-import { identity } from '../../main/util/function';
 
 /**
  *
@@ -34,8 +32,8 @@ import { identity } from '../../main/util/function';
  * */
 
 
-// (Array<A>, A -> B, (A,A) -> Boolean) -> Heap<A>
-export const heapify = (arr, getKey=identity, compare) => {
+// (A -> B, (A,A) -> Int) -> Array<A> -> Heap<A>
+export const heapify = (getKey, compare) => arr => {
   const queue = [...arr].sort(compare);
   return {
     queue: queue,
@@ -46,20 +44,23 @@ export const heapify = (arr, getKey=identity, compare) => {
   };
 };
 
-// Heap<A> -> Pair<A, Heap<A>>
-export const extractMin = (heap, getKey=identity, compare) =>[
+// (A -> B, (A,A) -> Int) -> Heap<A> -> Pair<A, Heap<A>>
+export const extractMin = (getKey, compare) => heap =>[
   heap.queue[0],
-  heapify(heap.queue.slice(1), getKey, compare)
+  heapify(getKey, compare)(heap.queue.slice(1))
 ];
 
-// (A, Heap<A>) -> [A]
-export const insert = (item, heap, getKey=identity, compare) =>
-  heapify([item].concat(heap.queue), getKey, compare);
+// (A -> B, (A,A) -> Int) -> (Heap<A>, A) -> Heap<A>
+export const insert = (getKey, compare) => (heap, item) =>
+  heapify(getKey, compare)([item].concat(heap.queue));
 
-// [A] -> [A]
-export const remove = (item, heap, getKey=identity, compare) => {
-  const pos = heap.positions[getKey(item)];
-  const q_ = heap.queue.slice(0,pos).concat(heap.queue.slice(pos + 1));
-  return heapify(q_, getKey, compare);
+// (A -> B, (A,A) -> Int) -> (Heap<A>, [String|Int]) -> Heap<A>
+export const remove = (getKey, compare) => (heap, id) => {
+  const pos = heap.positions[id];
+  return heapify(getKey, compare)(heap.queue.slice(0,pos).concat(heap.queue.slice(pos + 1)))
 };
+
+// (A -> B) -> (Heap<A>, [String|Int]) -> A
+export const valueAt = getValue => (heap, id) =>
+  getValue(heap.queue[heap.positions[id]]);
 
