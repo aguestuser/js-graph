@@ -6,9 +6,9 @@ describe('Application', () => {
 
   chai.should();
 
-  xit('meets the acceptance criteria of the challenge', () => {
+  it('meets the acceptance criteria of the challenge', () => {
 
-    run('src/resources/input.txt').should.eql(
+    run().should.eql(
       'Output #1: 9\n' +
       'Output #2: 5\n' +
       'Output #3: 13\n' +
@@ -21,3 +21,4 @@ describe('Application', () => {
       'Output #10: 7')
   });
 });
+

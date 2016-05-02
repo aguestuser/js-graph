@@ -1,12 +1,12 @@
 import chai from 'chai';
 chai.should();
 
-import { parseGraph, tokenize, format, read } from '../../main/parse';
-import { graph } from '../support/sampleData';
+import { parseGraph, tokenize, format, read } from '../../../main/graph/parse';
+import { graph } from '../../support/sampleData';
 
 describe('Parse module', () => {
 
-  const path = './src/test/support/input.txt';
+  const path = './src/main/input.txt';
   const graphString = 'Graph: AB5, BC4, CD8, DC8, DE6, AD5, CE2, EB3, AE7';
   const graphTokens = ['AB5', 'BC4', 'CD8', 'DC8', 'DE6', 'AD5', 'CE2', 'EB3', 'AE7'];
 

@@ -2,7 +2,7 @@ import fs from 'fs';
 
 // MAIN FUNCTION
 
-// String -> Graph (as defined in src/main/graph.js)
+// String -> Graph (as defined in src/main/graph/graph.js)
 export const parseGraph = path => format(tokenize(read(path)));
 
 // HELPERS
