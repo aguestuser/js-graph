@@ -19,7 +19,7 @@
 
 import { node, edges } from '../graph';
 import { enqueue, dequeue, isEmpty } from '../../collection/queue';
-import { last } from '../../collection/object';
+import { last } from '../../util/array';
 
 // (BfAcc, BfRes -> Bool) -> BfAcc
 export const searchWhile = (acc, pred) => {

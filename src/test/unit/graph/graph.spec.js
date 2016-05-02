@@ -1,31 +1,37 @@
 'use strict';
 import chai from 'chai';
-import sinon from 'sinon';
-import sinonChai from 'sinon-chai';
 
 import { graph as g } from '../../support/sampleData';
-import * as graph from '../../../main/graph/graph';
-import * as distance from '../../../main/graph/distance';
 
-describe('Graph interface', () => {
+import { node, edges } from '../../../main/graph/graph';
+
+
+describe('Graph module', () => {
 
   chai.should();
-  chai.use(sinonChai);
 
-  let _distance;
+  describe('#node', () => {
 
-  before(() => {
-    _distance = sinon.stub(distance, 'distance');
+    it('looks up a node in a graph', () => {
+      node(g, 'A').should.eql({
+        id: 'A',
+        edges: {
+          B: {id: 'B', weight: 5},
+          D: {id: 'D', weight: 5},
+          E: {id: 'E', weight: 7}
+        }
+      });
+    });
   });
 
-  after(() => {
-    _distance.restore();
-  });
+  describe('#edges', () => {
 
-  describe('#distance', () => {
-    it('delegates to distance module', () => {
-      graph.distance(g, ['A', 'B']);
-      _distance.should.have.been.calledWith(g, ['A', 'B']);
+    it('returns an array of all the edges from a node in a graph', () => {
+      edges(g, 'A').should.eql([
+        { id: 'B', weight: 5 },
+        { id: 'D', weight: 5 },
+        { id: 'E', weight: 7 }
+      ])
     });
   })
 });

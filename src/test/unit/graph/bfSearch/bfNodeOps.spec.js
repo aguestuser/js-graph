@@ -2,17 +2,10 @@
 import chai from 'chai';
 
 import { graph as g } from '../../../support/sampleData';
-import { identity, addToPath, addToHops } from '../../../../main/graph/bfSearch/bfNodeOps';
+import { addToPath, addToHops } from '../../../../main/graph/bfSearch/bfNodeOps';
 
 describe('Breadth First Node Operations module', () => {
   chai.should();
-
-  describe('#identity', () => {
-
-    it('returns the result from the input accumulator', () => {
-      identity({res: 'foo'}, g.A, g.B).should.eql({res: 'foo'});
-    });
-  });
 
   describe('#addToPath', () => {
 

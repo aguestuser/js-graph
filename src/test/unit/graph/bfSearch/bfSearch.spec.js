@@ -2,7 +2,8 @@
 
 import chai from 'chai';
 import {graph as g} from '../../../support/sampleData';
-import { values, count } from '../../../../main/collection/object';
+import { values } from '../../../../main/util/object';
+import { count } from '../../../../main/util/array';
 import { searchWhile, search, visit, record } from '../../../../main/graph/bfSearch/bfSearch';
 import { identity, addToPath } from '../../../../main/graph/bfSearch/bfNodeOps';
 

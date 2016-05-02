@@ -9,7 +9,8 @@
  * }
  */
 
-import { groupByValue, hasValue, includes, last } from '../../collection/object';
+import { groupByValue } from '../../util/object';
+import { last } from '../../util/array';
 import { searchWhile, search, visit } from './bfSearch';
 import { addToPath, addToHops } from './bfNodeOps';
 

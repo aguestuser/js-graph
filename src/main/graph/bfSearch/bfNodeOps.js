@@ -8,9 +8,6 @@
  */
 
 // (BfRes, Node, Node) -> BfRes
-export const identity = (res, tail, head) => res;
-
-// (BfRes, Node, Node) -> BfRes
 export const addToPath = (res, tail, head) =>  ({
   ...res,
   path: res.path.concat([head.id])

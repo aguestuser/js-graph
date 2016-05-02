@@ -7,29 +7,10 @@
  *
  */
 
-import { values } from '../collection/object';
-
-import { distance as _distance } from './distance';
-
-export const metrics = {
-  hops: 'hops',
-  distance: 'distance'
-};
+import { values } from '../util/object';
 
 // (Graph, String) -> Node
 export const node = (g, id) => g[id];
 
 // (Graph, String) -> Array<Edge>
 export const edges = (g, id) => values(g[id].edges);
-
-// (Graph, [Node]) -> Either[String,Int]
-export const distance = (graph, route) => _distance(graph, route);
-
-// Enum['hops'|'distance'] -> (Graph, Int, Node, Node) -> Int
-export const routesShorterThan = metric => (graph, len, start, end) => -1;
-
-// Enum['hops'|'distance'] -> (Graph, Int, Node, Node) -> Int
-export const routesEqualTo = metric => (graph, len, start, end) => -1;
-
-// (Graph, Node, Node) -> Int
-export const shortestPath = (graph, start, end) => -1;
