@@ -1,33 +1,26 @@
 'use strict';
 
-import {
-  LESS_THAN,
-  GREATER_THAN,
-  EQUAL_TO,
-  computeDistance,
-  countWhere,
-  shortestPath,
-} from './service/route';
-
 import { parseGraph } from './graph/parse';
+import * as r from './service/route';
+
+const { LESS_THAN, EQUAL_TO } = r;
 
 // String -> ()
 export const run = () => print(compute(parseGraph(`${__dirname}/input.txt`)));
 
 // Graph -> [String|Int]
 export const compute = g => [
-  computeDistance(g, ['A', 'B', 'C']),
-  computeDistance(g, ['A', 'D']),
-  computeDistance(g, ['A', 'D', 'C']),
-  computeDistance(g, ['A', 'E', 'B', 'C', 'D']),
-  computeDistance(g, ['A', 'E', 'D']),
-  countWhere(g)({ start: 'C', end: 'C', hops: {mustBe: LESS_THAN, num: 3 }}),
-  countWhere(g)({ start: 'A', end: 'C', hops: {mustBe: EQUAL_TO, num: 4 }}),
-  9,//shortestPath(g, 'A', 'C'),
-  9,//shortestPath(g, 'B', 'B'),
-  countWhere(g)({ start: 'C', end: 'C', distance: { mustBe: LESS_THAN, num: 30 }})
+  r.computeDistance(g, ['A', 'B', 'C']),
+  r.computeDistance(g, ['A', 'D']),
+  r.computeDistance(g, ['A', 'D', 'C']),
+  r.computeDistance(g, ['A', 'E', 'B', 'C', 'D']),
+  r.computeDistance(g, ['A', 'E', 'D']),
+  r.countWhere(g, { start: 'C', end: 'C', hops: {mustBe: LESS_THAN, num: 3 }}),
+  r.countWhere(g, { start: 'A', end: 'C', hops: {mustBe: EQUAL_TO, num: 4 }}),
+  r.shortestPath(g, 'A', 'C'),
+  r.shortestPath(g, 'B', 'B'),
+  r.countWhere(g, { start: 'C', end: 'C', distance: { mustBe: LESS_THAN, num: 30 }})
 ];
-
 
 // [String|Int] => String
 export const print = results =>
