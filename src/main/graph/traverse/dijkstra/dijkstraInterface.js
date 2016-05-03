@@ -4,7 +4,7 @@ import { heapify, extractMin, update, valueAt } from '../../../collection/minHea
 import { first, second, compare2 } from '../../../collection/pair';
 import { pairify } from '../../../collection/pair';
 
-import * as bfs from '../bfs/bfsManager';
+import * as bfs from '../bfs/bfsInterface';
 import * as dijkstra from './dijkstra';
 
 const ops = {

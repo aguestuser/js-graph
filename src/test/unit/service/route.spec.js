@@ -7,8 +7,8 @@ import sinonChai from 'sinon-chai';
 
 import * as route from '../../../main/service/route';
 import * as distance from '../../../main/graph/distance/distance';
-import * as fold from '../../../main/graph/traverse/fold/foldManager';
-import * as dijkstra from '../../../main/graph/traverse/dijkstra/dijkstraManager';
+import * as fold from '../../../main/graph/traverse/fold/foldInterface';
+import * as dijkstra from '../../../main/graph/traverse/dijkstra/dijkstraInterface';
 
 import { graph as g } from '../../support/sampleData';
 

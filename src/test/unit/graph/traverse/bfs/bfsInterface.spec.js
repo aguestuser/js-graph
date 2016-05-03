@@ -2,9 +2,9 @@
 import chai from 'chai';
 
 import { graph as g } from '../../../../support/sampleData';
-import { traverse, mapHops, mapDistances } from '../../../../../main/graph/traverse/bfs/bfsManager';
+import { traverse, mapHops, mapDistances } from '../../../../../main/graph/traverse/bfs/bfsInterface';
 
-describe('BFS Manager', () => {
+describe('BFS Interface', () => {
   chai.should();
 
   describe("#traverse", () => {

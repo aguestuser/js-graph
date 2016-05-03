@@ -3,9 +3,9 @@
 import chai from 'chai';
 
 import { graph as g } from '../../../../support/sampleData';
-import { shortestPath } from '../../../../../main/graph/traverse/dijkstra/dijkstraManager';
+import { shortestPath } from '../../../../../main/graph/traverse/dijkstra/dijkstraInterface';
 
-describe("Dijkstra's Algorithm Manager", () => {
+describe("Dijkstra's Algorithm Interface", () => {
 
   chai.should();
 

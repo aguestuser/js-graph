@@ -1,8 +1,8 @@
 'use strict';
 
 import * as distance from '../graph/distance/distance';
-import * as fold from '../graph/traverse/fold/foldManager';
-import * as dijkstra from '../graph/traverse/dijkstra/dijkstraManager';
+import * as fold from '../graph/traverse/fold/foldInterface';
+import * as dijkstra from '../graph/traverse/dijkstra/dijkstraInterface';
 
 // CONSTANTS
 export const EQUAL_TO = fold.EQUAL_TO;

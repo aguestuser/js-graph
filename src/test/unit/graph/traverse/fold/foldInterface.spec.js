@@ -13,9 +13,9 @@ import {
   donePreds,
   visitPreds,
   incrementOps
-} from '../../../../../main/graph/traverse/fold/foldManager';
+} from '../../../../../main/graph/traverse/fold/foldInterface';
 
-describe('Fold Manager', () => {
+describe('Fold Interface', () => {
 
   chai.should();
 

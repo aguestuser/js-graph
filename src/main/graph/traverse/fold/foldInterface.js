@@ -31,6 +31,8 @@ export const EQUAL_TO = 'equal';
 export const GREATER_THAN = 'greaterThan';
 export const LESS_THAN = 'lessThan';
 
+// MAIN FUNCTION
+
 // (Int, Graph, String, String) -> Int
 export const countWhere = (graph, specs) =>
   fold({
