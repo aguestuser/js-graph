@@ -3,8 +3,8 @@
 import chai from 'chai';
 
 import { graph as g } from '../../support/sampleData';
-import { hops, distance, endIs } from '../../../main/graph/treeFold/foldPredicates';
-import { incrementPath, incrementDistance } from '../../../main/graph/treeFold/foldOps';
+import { hops, distance, endIs } from '../../../main/graph/traverse/fold/ops/predicate';
+import { incrementPath, incrementDistance } from '../../../main/graph/traverse/fold/ops/traverse';
 import {
   LESS_THAN,
   GREATER_THAN,

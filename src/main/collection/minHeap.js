@@ -60,7 +60,14 @@ export const remove = (getKey, compare) => (heap, id) => {
   return heapify(getKey, compare)(heap.queue.slice(0,pos).concat(heap.queue.slice(pos + 1)))
 };
 
+// (A -> B, (A,A) -> Int) -> (Heap<A>, [String|Int], A) -> Heap<A>
+export const update = (getKey, compare) => (heap, id, value) => {
+  const [ins, rem] = [insert, remove].map(op => op(getKey, compare));
+  return ins(rem(heap, id), value);
+};
+
 // (A -> B) -> (Heap<A>, [String|Int]) -> A
 export const valueAt = getValue => (heap, id) =>
   getValue(heap.queue[heap.positions[id]]);
+
 

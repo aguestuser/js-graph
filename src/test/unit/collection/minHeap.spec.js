@@ -2,9 +2,9 @@
 
 import chai from 'chai';
 
-import { heapify, extractMin, insert, remove, valueAt } from '../../../main/collection/minHeap';
+import { heapify, extractMin, insert, remove, update, valueAt } from '../../../main/collection/minHeap';
 import { first, second, compare2 } from '../../../main/collection/pair';
-import { identity } from '../../../main/util/function';
+import { identity } from '../../../main/collection/util/function';
 
 describe('MinHeap', () => {
 
@@ -62,6 +62,20 @@ describe('MinHeap', () => {
         });
       });
     });
+
+    describe('#update', () => {
+
+      it('updates the value of an item in a minHeap, preserving minHeap properties', () => {
+        update(identity)({
+          queue: [1, 2, 3],
+          positions: { 1: 0, 2: 1, 3: 2 }
+        }, 2, 4).should.eql({
+          queue: [1, 3, 4],
+          positions: { 1: 0, 3: 1, 4: 2 }
+        });
+      });
+    });
+
 
     describe('#valueAt', () => {
 
@@ -124,6 +138,19 @@ describe('MinHeap', () => {
           }, 'B').should.eql({
             queue: [['C', 2], ['A', MAX]],
             positions: { C: 0, A: 1}
+          });
+        });
+      });
+
+      describe('#update', () => {
+
+        it('updates the value of an item in a minHeap, preserving minHeap properties', () => {
+          update(first, compare2)({
+            queue: [['C', 2], ['B', 3], ['A', MAX]],
+            positions: { C: 0, B: 1, A: 2}
+          }, 'C', ['C', 100]).should.eql({
+            queue: [['B', 3], ['C', 100], ['A', MAX]],
+            positions: { B: 0, C: 1, A: 2}
           });
         });
       });

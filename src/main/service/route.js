@@ -19,12 +19,14 @@
  *
  * */
 
-import { distance as _distance } from '../graph/distance';
+import { distance as _distance } from '../graph/distance/distance';
 
-import { fold } from '../graph/treeFold/fold';
-import { hops, distance as dist, endIs } from '../graph/treeFold/foldPredicates';
-import { incrementPath, incrementDistance, combineRoutes, addRouteIf } from '../graph/treeFold/foldOps';
-import { compose2 } from '../util/function';
+import { fold } from '../graph/traverse/fold/fold';
+import { hops, distance as dist, endIs } from '../graph/traverse/fold/ops/predicate';
+import { combineRoutes } from '../graph/traverse/fold/ops/combine';
+import { addRouteIf } from '../graph/traverse/fold/ops/visit';
+import { incrementPath, incrementDistance } from '../graph/traverse/fold/ops/traverse';
+import { compose2 } from '../collection/util/function';
 
 
 // CONSTANTS

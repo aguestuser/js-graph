@@ -7,7 +7,7 @@
  *
  */
 
-import { values } from '../util/object';
+import { values } from '../collection/util/object';
 
 // (Graph, String) -> Node
 export const node = (g, id) => g[id];

@@ -1,3 +1,7 @@
+'use strict';
+
+export const p = ['A', 'D', 'E', 'B', 'C'];
+
 export const graph = {
   A: {
     id: 'A',
