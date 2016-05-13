@@ -69,5 +69,3 @@ export const update = (getKey, compare) => (heap, id, value) => {
 // (A -> B) -> (Heap<A>, [String|Int]) -> A
 export const valueAt = getValue => (heap, id) =>
   getValue(heap.queue[heap.positions[id]]);
-
-
