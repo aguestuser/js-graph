@@ -10,9 +10,9 @@ import {
   swap,
   swapQueue,
   swapMap
-} from '../../../main/collection/minHeapHelpers';
+} from '../../../../main/collection/minHeap/helpers';
 
-import { identity } from '../../../main/collection/util/function';
+import { identity } from '../../../../main/collection/util/function';
 
 describe('MinHeap', () => {
 

@@ -1,6 +1,6 @@
 'use strict';
 
-import { heapify, extractMin, update, valueAt } from '../../../collection/minHeap';
+import { heapify, extractMin, update, valueAt } from '../../../collection/minHeap/minHeap';
 import { first, second, compare2 } from '../../../collection/pair';
 import { pairify } from '../../../collection/pair';
 

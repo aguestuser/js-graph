@@ -4,7 +4,7 @@ import chai from 'chai';
 
 import { graph as g } from '../../../../support/sampleData';
 import { shortestPath } from '../../../../../main/graph/traverse/dijkstra/dijkstra';
-import { heapify, extractMin, update, valueAt } from '../../../../../main/collection/minHeap';
+import { heapify, extractMin, update, valueAt } from '../../../../../main/collection/minHeap/minHeap';
 import { first, second, compare2 } from '../../../../../main/collection/pair';
 
 describe("Dijkstra's Algorithm", () => {

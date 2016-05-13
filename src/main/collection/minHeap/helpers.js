@@ -1,6 +1,6 @@
 'use strict';
 
-import { first, second } from './pair';
+import { first, second } from './../pair';
 
 // MAIN FUNCTIONS
 

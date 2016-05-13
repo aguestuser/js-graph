@@ -2,9 +2,9 @@
 
 import chai from 'chai';
 
-import { heapify, extractMin, insert, remove, update, valueAt } from '../../../main/collection/minHeap';
-import { first, second, compare2 } from '../../../main/collection/pair';
-import { identity } from '../../../main/collection/util/function';
+import { heapify, extractMin, insert, remove, update, valueAt } from '../../../../main/collection/minHeap/minHeap';
+import { first, second, compare2 } from '../../../../main/collection/pair';
+import { identity } from '../../../../main/collection/util/function';
 
 describe('MinHeap', () => {
 
