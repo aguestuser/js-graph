@@ -1,6 +1,9 @@
 // A -> A
 export const identity = a => a;
 
+// A -> String
+export const toString = a => a.toString();
+
 // (A,B) -> B
 export const identity2 = (a, b) => b;
 
@@ -15,3 +18,6 @@ export const compose2 = funcs => (arg1, arg2) =>
 // (A, [A -> Boolean] -> Boolean
 export const satisfies = (obj, preds) =>
   preds.reduce((acc, pred) => acc && pred(obj), true);
+
+// (number, number) -> number
+export const compareNums = (x,y) => x - y;

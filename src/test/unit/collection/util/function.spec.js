@@ -6,7 +6,8 @@ import {
   identity2,
   compose,
   compose2,
-  satisfies
+  satisfies,
+  compareNums
 } from '../../../../main/collection/util/function';
 
 describe('Function utility module', () => {
@@ -64,6 +65,30 @@ describe('Function utility module', () => {
 
     it("returns false if an object satisfies some but not all predicates in a list", () => {
       satisfies(foo, [lessThan(3, 'bar'), lessThan(1, 'baz')]).should.be.false;
+    });
+  });
+
+  describe('#compareInts', () => {
+
+    describe('when first arg is greater than second arg', () => {
+
+      it('returns a value less than zero', () => {
+        compareNums(0,1).should.be.lessThan(0);
+      });
+    });
+
+    describe('when first arg is less than second arg', () => {
+
+      it('returns a value greater than zero', () => {
+        compareNums(1,0).should.be.greaterThan(0);
+      });
+    });
+
+    describe('when two args are equal', () => {
+
+      it('returns zero', () => {
+        compareNums(0,0).should.equal(0);
+      });
     });
   });
 });

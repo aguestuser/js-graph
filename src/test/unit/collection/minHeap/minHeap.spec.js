@@ -4,7 +4,7 @@ import chai from 'chai';
 
 import { heapify, extractMin, insert, remove, update, valueAt } from '../../../../main/collection/minHeap/minHeap';
 import { first, second, compare2 } from '../../../../main/collection/pair';
-import { identity } from '../../../../main/collection/util/function';
+import { identity, toString, compareNums } from '../../../../main/collection/util/function';
 
 describe('MinHeap', () => {
 
@@ -14,10 +14,10 @@ describe('MinHeap', () => {
 
     describe('#minHeapify', () => {
 
-      it('sorts integers in increasing order', () => {
-        heapify(identity)([3, 2, 1]).should.eql({
-          queue: [1, 2, 3],
-          positions: { 1: 0, 2: 1, 3: 2 }
+      it('sorts integers into a min-heap', () => {
+        heapify(toString,compareNums)([3, 2, 1]).should.eql({
+          queue: [1, 3, 2],
+          positions: { 1: 0, 3: 1, 2: 2 }
         })
       });
     });
@@ -25,7 +25,7 @@ describe('MinHeap', () => {
     describe('#extractMin', () => {
 
       it('returns the smallest element in the queue and the new queue', () => {
-        extractMin(identity)({
+        extractMin(toString,compareNums)({
           queue: [1, 2, 3],
           positions: { 1: 0, 2: 1, 3: 2 }
         }).should.eql([
@@ -40,12 +40,12 @@ describe('MinHeap', () => {
     describe('#insert', () => {
 
       it('inserts item into a minHeap, preserving min heap properties', () => {
-        insert(identity)({
+        insert(toString,compareNums)({
           queue: [1, 3],
           positions: { 1: 0, 3: 1 }
         }, 2).should.eql({
-          queue: [1, 2, 3],
-          positions: { 1: 0, 2: 1, 3: 2 }
+          queue: [1, 3, 2],
+          positions: { 1: 0, 3: 1, 2:2 }
         })
       });
     });
@@ -53,10 +53,10 @@ describe('MinHeap', () => {
     describe('#remove', () => {
 
       it('removes an item from a minHeap, preserving minHeap properties', () => {
-        remove(identity)({
+        remove(toString,compareNums)({
           queue: [1, 2, 3],
           positions: { 1: 0, 2: 1, 3: 2 }
-        }, 2).should.eql({
+        }, '2').should.eql({
           queue: [1, 3],
           positions: { 1: 0, 3: 1 }
         });
@@ -66,10 +66,10 @@ describe('MinHeap', () => {
     describe('#update', () => {
 
       it('updates the value of an item in a minHeap, preserving minHeap properties', () => {
-        update(identity)({
+        update(toString,compareNums)({
           queue: [1, 2, 3],
           positions: { 1: 0, 2: 1, 3: 2 }
-        }, 2, 4).should.eql({
+        }, '2', 4).should.eql({
           queue: [1, 3, 4],
           positions: { 1: 0, 3: 1, 4: 2 }
         });
@@ -96,8 +96,8 @@ describe('MinHeap', () => {
 
       it('sorts an arry of records in increasing order according to a comparison function', () => {
         heapify(first, compare2)([ ['A', MAX], ['B', 3], ['C', 2] ]).should.eql({
-          queue: [['C', 2], ['B', 3], ['A', MAX]],
-          positions: { C: 0, B: 1, A: 2}
+          queue: [['C', 2], ['A', MAX], ['B', 3]],
+          positions: { C: 0, A: 1, B: 2 }
         });
       });
 
@@ -113,7 +113,7 @@ describe('MinHeap', () => {
               positions: { B: 0, A: 1}
             }
           ]);
-        })
+        });
       });
 
       describe('#insert', () => {
@@ -123,8 +123,8 @@ describe('MinHeap', () => {
             queue: [['B', 3], ['A', MAX]],
             positions: { B: 0, A: 1}
           }, ['C', 2]).should.eql({
-            queue: [['C', 2], ['B', 3], ['A', MAX]],
-            positions: { C: 0, B: 1, A: 2}
+            queue: [['C', 2], ['A', MAX], ['B', 3]],
+            positions: { C: 0, A: 1, B: 2 }
           });
         });
       });
@@ -149,8 +149,8 @@ describe('MinHeap', () => {
             queue: [['C', 2], ['B', 3], ['A', MAX]],
             positions: { C: 0, B: 1, A: 2}
           }, 'C', ['C', 100]).should.eql({
-            queue: [['B', 3], ['C', 100], ['A', MAX]],
-            positions: { B: 0, C: 1, A: 2}
+            queue: [['B', 3], ['A', MAX], ['C', 100]],
+            positions: { B: 0, A: 1, C: 2}
           });
         });
       });
