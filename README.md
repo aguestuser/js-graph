@@ -62,4 +62,4 @@ To assist with the above, I implemented purely functional versions of min-heap a
 
 ## Testing
 
-Every module has unit tests. While some modules have cross-dependencies on one another, for expediency's sake, I didn't bother mocking any modules accept for those of the `route` service. Unit tests for the `route` service test only that it delegates to the appropriate sub-modules, while its correctness is tested in functional tests.
+Every module has unit tests. While some modules have cross-dependencies on one another, for expediency's sake, I didn't bother mocking any modules accept for those of the `route` service. Unit tests for the `route` service test only that it delegates to the appropriate sub-mfodules, while its correctness is tested in functional tests.
